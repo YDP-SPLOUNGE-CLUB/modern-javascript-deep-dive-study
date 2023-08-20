@@ -492,3 +492,9 @@ console.log(Object.isFrozen(person.address)); // true
 person.address.city = 'Busan';
 console.log(person); // {name: "Lee", address: {city: 'Seoul'}}
 ```
+
+# 알고가기
+---
+- [ ] 데이터 프로퍼티에 대해 설명해주세요.
+- [ ] 접근자 프로퍼티에 대해 설명해주세요.
+- [ ] Object.preventExtensions, Object.seal, Object.freeze 에 대해 설명해주세요.

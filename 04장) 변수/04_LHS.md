@@ -258,3 +258,18 @@ var observable$ = fromEvent(docuemnt, 'click');
 생성자 함수, 클래스의 이름에는 파스칼 케이스를 사용한다.
 
 ECMAScript 사양에 정의되어 있는 객체와 함수들도 카멜 케이스와 파스칼 케이스를 사용한다.
+
+# 알고 가기
+---
+- [ ] 아래 두 가지 코드의 동작에 대하여 설명하시오.
+
+```js
+var score;
+score = 80;
+score = 90;
+```
+
+```js
+var score = 80;
+score = 90;
+```

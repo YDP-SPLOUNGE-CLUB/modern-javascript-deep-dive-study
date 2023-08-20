@@ -183,3 +183,7 @@ console.log(count) // 3;
 const regexp = new RegExp(search, 'g');
 console.log(string.atch(regexp).length); // 3
 ```
+
+# 알고 가기
+---
+생략
