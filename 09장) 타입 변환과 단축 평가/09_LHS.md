@@ -454,3 +454,13 @@ console.log(foo); // "default string"
 var foo = '' ?? 'default string';
 console.log(foo); // ''
 ```
+
+# 알고 가기
+---
+- [ ] 다음 코드의 결과값을 예측해보시오.
+
+```js
+'10' + 2 // ??
+
+5 * '10' // ??
+```
