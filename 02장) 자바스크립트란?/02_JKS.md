@@ -25,18 +25,18 @@
 > 범용 프로그래밍 언어로서 갖춰야 할 기능들을 대거 도입하는 큰 변화가 있었다.
 > ES6 이후 버전업은 비교적 작은 기능을 추가하는 수준으로 매년 공개할 것이라 예고하였다.
 
-| 버전   | 출시 연도 | 특징                                                                                                                         |                             
-|------|-------|----------------------------------------------------------------------------------------------------------------------------|
-| ES1  | 1997  | 초판                                                                                                                         |
-| ES2  | 1998  | ISO/IEC 16262 국제 표준과 동일한 규격 적용                                                                                             |
-| ES3  | 1999  | 정규 표현식, try catch                                                                                                          |
-| ES5  | 2009  | HTML와 함께 출현한 표준안, JSON, strict mode, 접근자 프로퍼티, 프로퍼티 어트리뷰트 제어, 향상된 배열, 조작 기능 (forEach map, filter, reduce, some, every)     |
-| ES6  | 2015  | let/const, 화살표, 템플릿 리터널, 디스트럭처링 할당, 스프레드, rest 파라미터, 심벌, 프로미스, Map/Set 이터러블 for ... of, 제너레이터, Proxy, 모듈 import/export     |
-| ES7  | 2016  | 지수 연산자, Array, prototype, includes, String.prototype.includes                                                              |
-| ES8  | 2017  | async/await Object 정적 메서드(Object.values, Object.entries, Object.getOwnPropertyDescriptors)                                 |
-| ES9  | 2018  | Obejct rest/spread 프로퍼티, Promise.prototype, finally, async generator, for await ... of                                     |
-| ES10 | 2019  | Object.formEntries, Array.prototype.flat, Array.prototype.flatMap, optional catch binding                                  |
-| ES11 | 2020  | String.prototype.matchAll, BingInt, globalThis, Promise.allSettled, null 병합 연산자, 옵셔널 체이닝 연산자, for ... in enumeration order |
+| 버전   | 출시 연도 | 특징                                                                                                                        |                             
+|------|-------|---------------------------------------------------------------------------------------------------------------------------|
+| ES1  | 1997  | 초판                                                                                                                        |
+| ES2  | 1998  | ISO/IEC 16262 국제 표준과 동일한 규격 적용                                                                                            |
+| ES3  | 1999  | 정규 표현식, try catch                                                                                                         |
+| ES5  | 2009  | HTML 와 함께 출현한 표준안, JSON, strict mode, 접근자 프로퍼티, 프로퍼티 어트리뷰트 제어, 향상된 배열, 조작 기능 (forEach map, filter, reduce, some, every)   |
+| ES6  | 2015  | let/const, 화살표, 템플릿 리터널, 디스트럭처링 할당, 스프레드, rest 파라미터, 심벌, 프로미스, Map/Set 이터러블 for ... of, 제너레이터, Proxy, 모듈 import/export    |
+| ES7  | 2016  | 지수 연산자, Array, prototype, includes, String.prototype.includes                                                             |
+| ES8  | 2017  | async/await Object 정적 메서드(Object.values, Object.entries, Object.getOwnPropertyDescriptors)                                |
+| ES9  | 2018  | Object rest/spread 프로퍼티, Promise.prototype, finally, async generator, for await ... of                                    |
+| ES10 | 2019  | Object.formEntries, Array.prototype.flat, Array.prototype.flatMap, optional catch binding                                 |
+| ES11 | 2020  | String.prototype.matchAll, BigInt, globalThis, Promise.allSettled, null 병합 연산자, 옵셔널 체이닝 연산자, for ... in enumeration order |
 
 ## 생각보다 모르는게 많고 최근에 생긴것이 많다.
 
@@ -112,7 +112,7 @@ class UserFinder {
 
 | 버전   | 출시 연도 | 특징                                                                                                                                            |                             
 |------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| ES13 | 2022  | 퍼블릭 핃드 및 정적 필드 선언 방식 개선, 프라이빗 접근 제어자 추가, 정적 초기화 블록 추가, in 연산자, 최상위 레벨 await 모듈 호출 가능, at, error.prototype.cause, Object.hasOwn(), 정규표현식 플래그 d |
+| ES13 | 2022  | 퍼블릭 필드 및 정적 필드 선언 방식 개선, 프라이빗 접근 제어자 추가, 정적 초기화 블록 추가, in 연산자, 최상위 레벨 await 모듈 호출 가능, at, error.prototype.cause, Object.hasOwn(), 정규표현식 플래그 d |
 
 
 ```javascript
@@ -269,8 +269,6 @@ assert.deepEqual(
     matchObj.indices[2], [4, 6] // (B)
 );
 
-![img.png](img.png)
-
 ```
 
 | 버전   | 출시 연도 | 특징                                                                                       |                             
@@ -388,3 +386,10 @@ NODE.JS는 신이고.. 나는 무적이다..
 ## 느낀 점
 
 Webpack을 직접 건든적은 있는데 바벨을 아예 건든적이 없어서;; 49장 딱 기다려라잉
+
+---
+
+[ ] 자바스크립트의 특징에 대해서 서술해보시오.
+
+[ ] ES6 이상의 문법 중 많이 사용하고 있는 문법을 5가지 서술해보시오.
+

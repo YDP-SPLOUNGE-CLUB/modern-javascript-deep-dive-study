@@ -228,3 +228,7 @@ console.log(foo); // "default string"
 ```
 
 > 좌항의 피연산자가 false 로 평가되는 Falsy 값(false, undefined, null, 0, -0, Nan, '')을 주의하자
+
+---
+
+[ ] 단축 평가에 대해서 서술하시오.
