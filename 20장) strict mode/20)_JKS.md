@@ -143,3 +143,7 @@ foo();
     console.log(arguments); // {0: 1, length: 1}
 })(1);
 ```
+
+---
+
+strict 모드를 권장하지 않는 이유는?
