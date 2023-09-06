@@ -243,7 +243,7 @@ console.log(getThisBinding.call(thisArg)); // { a: 1 }
 
 ---
 
-[] this 란?
-[] 메서드, 생성자 함수 내에서 this 를 호출하면 어떤 일이 일어나는지 설명하시오.
+- [ ] this 란?
+- [ ] 메서드, 생성자 함수 내에서 this 를 호출하면 어떤 일이 일어나는지 설명하시오.
 
 
