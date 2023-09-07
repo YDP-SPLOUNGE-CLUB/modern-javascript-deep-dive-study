@@ -260,3 +260,7 @@ function sum(x = 0, y = 0) {
 console.log(sum(1,2)); // 3
 console.log(sum(1)); // 1
 ```
+
+---
+
+- [ ] 화살표 함수 특징을 설명하시오
