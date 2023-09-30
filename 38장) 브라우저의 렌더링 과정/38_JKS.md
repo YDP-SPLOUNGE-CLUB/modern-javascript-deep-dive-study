@@ -166,4 +166,4 @@ meta 태그의 charset 어트리뷰트에 선언된 인코딩 방식은 content-
 
 
 - [ ] https://google.com 을 검색했을 때는 어떤 일이 일어나는가.
-- 
+- [ ] 렌더 트리 생성
