@@ -1,213 +1,151 @@
-# 48.1 모듈의 일반적 의미
-### 모듈
-> 모듈(module)이란 애플리케이션을 구성하는 개별적 요소로서 재사용 가능한 코드 조각을 말한다.
+# 47.1 에러 처리의 필요성
 
-일반적으로 모듈은 기능을 기준으로 파일 단위로 분리한다.
-
-이때 모듈이 성립하려면 모듈은 자신만의 **파일 스코프(모듈 스코프)** 를 가질 수 있어야 한다.
-
-자신만의 파일 스코프를 갖는 모듈의 자산(모듈에 포함되어 있는 변수, 함수, 객체 등)은 기본적으로 비공개 상태다. 자신만의 파일 스코프를 갖는 모듈의 모든 자산은 캡슐화되어 다른 모듈에서 접근할 수 없다.
-즉, 모듈은 개별적 존재로서 애플리케이션과 분리되어 존재한다.
-
-하지만 애플리케이션과 완전히 분리되어 개별적으로 존재하는 모듈은 재사용이 불가능하므로 존재의 의미가 없다.
-
-모듈은 애플리케이션이나 다른 모듈에 의해 재사용되어야 의미가 있다.
-따라서 **모듈은 공개가 필요한 자산에 한정하여 명시적으로 선택적 공개가 가능하다. 이를 export라 한다.**
-
-공개(export) 된 모듈의 자산은 다른 모듈에서 재사용할 수 있다.
-이때 공개된 **모듈의 자산을 사용하는 모듈을 모듈 사용자(module consumer)라 한다.**
-
-**모듈 사용자는 모듈이 공개한 자산 중 일부 또는 전체를 선택해 자신의 스코프 내로 불러들여 재사용할 수 있다. 이를 import라 한다.**
-
-이처럼 모듈은 애플리케이션과 분리되어 개별적으로 존재하다가 필요에 따라 다른 모듈에 의해 재사용된다.
-
-모듈은 기능별로 분리되어 개별적인 파일로 작성된다.
-따라서 코드의 단위를 명확히 분리하여 애플리케이션을 구성할 수 있고, 재사용성이 좋아서 개발 효율성과 유지보수성을 높일 수 있다.
-
-# 48.2 자바스크립트와 모듈
-
-자바스크립트 파일을 여러 개의 파일로 분리하여 script 태그로 로드해도 분리된 자바스크립트 파일들은 결국 하나의 자바스크립트 파일 내에 있는 것처럼 동작한다.
-즉, 모든 자바스크립트 파일은 하나의 전역을 공유한다.
-
-따라서 분리된 자바스크립트 파일들의 전역 변수가 중복되는 등의 문제가 발생할 수 있다.
-이것으로 모듈을 구현할 수 없다.
-
-자바스크립트를 클라이언트 사이드, 즉 브라우저 호나경에 국한하지 않고 범용적으로 사용하려는 움직임이 생기면서 모듈 시스템은 반드시 해결해야 하는 핵심 과제가 되었다.
-이런 상황에서 제안한 것이 CommonJS와 AMD(Asynchronous Module Definition)다.
-
-이로써 자바스크립트의 모듈 시스템은 크게 CommonJS와 AMD 진영으로 나뉘게 되었고 브라우저 환경에서 모듈을 사용하기 위해서는 CommonJS 또는 AMD를 구현한 모듈 로더 라이브러리를 사용해야 하는 상황이 되었다.
-
-자바스크립트 런타임 환경인 Node.js 는 모듈 시스템의 사실상 표준인 CommonJS를 채택했고
-독자적인 진화를 거쳐, 현재는 CommonJS 사양과 100% 동일하지는 않지만 기본적으로 CommonJS 사양을 따르고 있다.
-
-즉 Node.js는 ECMAScript 표준 사양은 아니지만 모듈 시스템을 지원한다.
-따라서 Node.js 환경에서는 파일 별로 독립적인 파일 스코프(모듈 스코프)를 갖는다.
-
-# 48.3 ES6 모듈(ESM)
-
-이러한 상황에서 **ES6에서는 클라이언트 사이드 자바스크립트에서도 동작하는 모듈 기능을 추가했다.**
-
-ESM의 사용법은 script 태그에 `type="module"` 어트리뷰트를 추가하면 로드된 자바스크립트 파일은 모듈로서 동작한다.
-일반적인 **자바스크립트 파일이 아닌 ESM임을 명확히 하기 위해 ESM의 파일 확장자는 mjs를 사용할 것을 권장한다.**
-
-```html
-<script type="module" src="app.js"></script>
-```
-
-ESM에는 클래스와 마찬가지로 기본적으로 strict mode 가 적용된다.
-
-## 48.3.1 모듈 스코프
-
-ESM은 독자적인 모듈 스코프를 갖는다.
-ESM이 아닌 일반적인 자바스크립트 파일은 script 태그로 분리해서 로드해도
-독자적인 모듈 스코프를 갖지 않는다.
+try...catch 문을 해 발생한 에러에 적적하게 대응하면 프로그램이 강제 종료되지 않고 계속해서 코드를 실행시킬 수 있다.
 
 ```js
-// foo.js
-var x = 'foo';
-console.log(window.x); // foo
+try {
+	foo()
+} catch(error) {
+	console.error('[에러발생]', error)
+}
+// 프로그램이 강제 종료되지 않는다.
 ```
+
+직접적으로 에러를 발생하지 않는 예외(exception)적인 상황이 발생할 수도 있다.
+예외적인 상황에 적절하게 대응하지 않으면 에러로 이어질 가능성이 크다.
+
+# 47.2 try... catch... finally 문
+
+에러 처리를 구현하는 방법은 크게 두 가지가 있다.
+1. 예외적인 상황이 발생하면 반환하는 값(null 또는 -1)을 if 문이나 단축 평가 또는 옵셔널 체이닝 연산자를 통해 확인해서 처리는 방법
+2. 에러 처리 코드를 미리 등록해 두고 에러가 발생하면 에러 처리 코드로 점프하도록 하는 방법
+
+try...catch...finally 문은 두 번째 방법이다.
+이 방법을 에러 처리(error handling)이라 한다.
 
 ```js
-// bar.js
-var x = 'bar' // x는 전역변수다 foo.js에서 선언한 전역변수 x와 중복되었다.
-console.log(window.x); // bar
+try {
+	// 실행할 코드(에러가 발생할 가능성이 있는 코드)
+}
+catch (err) {
+	// try 코드 블록에서 에러가 발생하면 이 코드의 블록의 코드가 실행된다.
+	// err 에는 try 코드 블록에서 발생한 Error 객체가 전달된다.
+}
+finally {
+	// 에러 발생과 상관없이 반드시 한 번 실행된다.
+}
 ```
 
-```html
-<!DOCTYPE html>
-<html>
-<body>
-	<script src="foo.js"></script>
-	<script src="bar.js"></script>
-</body>
-</html>
-```
+# 47.3 Error 객체
 
-로드된 2개의 자바스크립트 파일은 하나의 자바스크립트 파일 내에 있는 것처럼 동작한다.
-즉 하나의 전역을 공유한다.
-따라서 foo.js 에서 선언한 x 변수와 bar.js 에서 선언한 x 변수는 중복 선언되며 의도치 않게 x 변수의 값이 덮어써진다.
-
-ESM 은 파일 자체의 독자적인 모듈 스코프를 제공한다.
-따라서 모듈 내에서 var 키워드로 선언한 변수는 더는 전역 변수가 아니며 window 객체의 프로퍼티도 아니다.
+Error 생성자 함수는 에러 객체를 생성한다.
+Error 생성자 함수에는 에러를 상세히 설명하는 에러 메시지를 인수로 전달할 수 있다.
 
 ```js
-// foo.mjs
-var x = 'foo';
-console.log(window.x); // undefined
+const error = new Error('invalid')
+```
+
+Error 생성자 함수가 생성한 에러 객체는 message 프로퍼티와 stack 프로퍼티를 갖는다.
+message 프로퍼티의 값은 Error 생성자 함수에 인수로 전달한 에러 메시지이고,
+stack 프로퍼티의 값은 에러를 발생시킨 콜스택의 호출 정보를 나타내는 문자열이며 디버깅 목적으로 사용한다.
+
+자바스크립트는 Error 생성자 함수를 포함해 7가지의 에러 객체를 생성할 수 있는 Error 생성자 함수를 제공한다.
+SyntaxError, ReferenceError, TypeError, RagneError, URIError, EvalError 생성자 함수가 생성한 에러 객체의 프로토타입은 모두 Error.prototype을 상속받는다.
+
+| 생성자 함수    | 인스턴스                                                                       |
+| -------------- | ------------------------------------------------------------------------------ |
+| Error          | 일반적 에러 객체                                                               |
+| SyntaxError    | 자바스크립트 문법에 맞지 않는 문을 해석할 때 발생하는 에러 객체                |
+| ReferenceError | 참조할 수 없는 식별자를 참조했을 때 발생하는 에러 객체                         |
+| TypeError      | 피연산산자 또는 인수의 데이터 타입이 유효하지 않을 때 발생하는 에러 객체       |
+| RangeError     | 숫자값 허용 범위를 벗어났을 때 발생하는 에러 객체                              |
+| URIError       | encodeURI 또는 decodeuRI 함수에 부적절한 인수를 전달했을 때 발생하는 에러 객체 |
+| EvalError      | eval 함수에서 발생하는 에러 객체                                               |
+
+# 47.4 throw 문
+
+Error 생성자 함수로 에러 객체를 생성한다고 에러가 발생하는 것은 아니다.
+즉 에러 객체 생성과 에러 발생은 의미가 다르다.
+
+```js
+try {
+	new Error('something wrong');
+} catch (error) {
+	console.log(error);
+}
+```
+
+에러를 발생시키려면 try 코드 블록에서 throw 문으로 에러 객체를 던져야 한다.
+
+```text
+throw 표현식;
+```
+
+thorw 문의 표현식은 어떤 값이라도 상관없지만 일반적으로 에러 객체를 지정한다.
+에러를 던지면 catch문의 에러 변수가 생성되고 던져진 에러 객체가 할당된다.
+
+그리고 catch 코드 블록이 실행되기 시작한다.
+
+```js
+try {
+	throw new Error('something wrong');
+} catch (error) {
+	console.log(error);
+}
 ```
 
 ```js
-// bar.mjs
-var x = 'bar' // x는 전역변수다 foo.js에서 선언한 전역변수 x와 중복되었다.
-console.log(window.x); // undefined
+const repeat = (n, f) => {
+	if(typeof f !== 'function') throw new TypeError('f must be a function');
+	// ...
+}
+
+try {
+	// repeat 함수는 에러를 발생시킬 가능성이 있으므로 try 코드 블록 내부에서 호출해야한다.
+	repeat(2, 1);
+} catch (err) {
+	console.error(err); // TypeError: f must be a function
+}
 ```
 
-```html
-<!DOCTYPE html>
-<html>
-<body>
-	<script type="module" src="foo.mjs"></script>
-	<script type="module" src="bar.mjs"></script>
-</body>
-</html>
-```
+# 47.5 에러의 전파
 
-모듈 내에서 선언한 식별자는 모듈 외부에서 참조할 수 없다.
-모듈 스코프가 다르기 때문이다.
+에러는 호출자 방향으로 전파된다.
+콜 스택의 아래 방향(실행 중인 실행 컨텍스트가 푸시되기 직전에 푸시된 실행 컨텍스트 방향)으로 전파된다.
 
 ```js
-// foo.mjs
-var x = 'foo';
-console.log(x); // foo
+const foo = () => {
+	throw Error('foo error'); // 4
+}
+const bar = () => {
+	foo(); // 3
+}
+const baz = () => {
+	bar(); // 2
+}
+try {
+	baz(); // 1
+} catch(e) {
+	console.error(e)
+}
 ```
 
-```js
-// bar.mjs
-console.log(x); // ReferenceError: x is not defined
-```
+1 에서 baz 함수를 호출하면
+2 에서 bar 함수가 호출되고
+3 에서 foo 함수가 호출되고
+foo 함수는 4 에서 에러를 throw 한다.
 
-```html
-<!DOCTYPE html>
-<html>
-<body>
-	<script src="foo.js"></script>
-	<script src="bar.js"></script>
-</body>
-</html>
-```
+이때 foo 함수가 throw한 에러는 다음과 같이 호출자에게 전파되어 전역에서 캐치된다.
 
-## 48.3.2 export 키워드
+![[Pasted image 20231015203110.png]]
 
-모듈 내부에서 선언한 식별자를 외부에 공개하여 다른 모듈들이 재사용할 수 있게 하려면 export 키워드를 사용한다.
+이처럼 throw 된 에러를 캐치하지 않으면 호출자 방향으로 전파된다.
 
-```js
-export const pi = Math.PI;
-```
+주의할 것은 비동기 함수인 setTimeout이나 프로미스 후속 처리 메서드의 콜백 함수는 호출자가 없다는 것이다.
+setTimeout 이나 프로미스 후속 처리 메서드의 콜백 함수는 태스크 큐나 마이크로태스크 큐에 일시 저장되었다가 콜 스택이 비면 이벤트 루프에 의해 콜스택으로 푸시되어 실행된다.
+이때 콜스택에 푸시된 콜백함수의 실행 컨텍스트는 콜 스택의 가장 하부에 존재하게 된다.
+따라서 에러를 전파할 호출자가 존재하지 않는다.
 
-하나의 객체로 구성하여 한번에 export 할 수도 있다.
-
-```js
-export { pi, square, Person }
-```
-
-## 48.3.3 import 키워드
-
-다른 모듈에서 공개한 식별자를 자신의 모듈 스코프 내부로 로드하려면 import 키워드를 사용한다.
-다른 모듈이 export 한 식별자 이름으로 import 해야하며 ESM의 경우 파일 확장자를 생략할 수 없다.
-
-```js
-// app.mjs
-import { pi, square, Person } from '.lib.mjs';
-```
-
-```html
-<html>
-<body>
-	<script type="module" src="app.mjs"></script>
-</body>
-</html>
-```
-
-위 예제의 app.js 는 애플리케이션의 진입점(entry point)이므로 반드시 script 태그로 로드해야 한다.
-하지만 lib.mjs는 app.mjs의 import 문에 의해 로드되는 의존성(dependency)이다.
-
-따라서 lib.mjs는 script 태그로 로드하지 않아도 된다.
-
-모듈이 export 한 식별자 이름을 일일이 지정하지 않고 하나의 이름으로 한 번에 import 할 수도 있다.
-이때 import 되는 식별자는 as 뒤에 지정한 이름의 객체에 프로퍼티로 할당된다.
-
-```js
-import * as lib from './lib.mjs'
-```
-
-모듈이 export 한 식별자 이름을 변경해서 import 할 수도 있다.
-
-```js
-import { pi as PI, square as sq, Person as P} = from '.lib.mjs'
-```
-
-모듈에서 하나의 값만 export 한다면 default 키워드를 사용할 수 있따.
-default 키워드를 사용하는 경우 기본적으로 이름 없이 하나의 값을 export 한다.
-
-```js
-// lib.mjs
-export default x => x * x;
-```
-
-default 키워드를 사용하는 경우 var,let,const 키워드를 사용할 수 없다.
-
-```js
-// lib.mjs
-export default const foo = () => {} // SyntaxError
-```
-
-default 키워드와 함께 export 한 모듈은 {} 임의의 이름으로 import 한다.
-
-```js
-import square form './lib.mjs';
-```
-
-# 알고가기
+# 알고 가기
 ---
 - 생략
