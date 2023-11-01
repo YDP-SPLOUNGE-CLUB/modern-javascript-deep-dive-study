@@ -11,7 +11,7 @@
 - 매 주 주어진 책 분량을 정리하여 서로 발표하는 시간을 가집니다.
 - 책을 읽으며 추가로 궁금한 내용이 있으면 issue에 등록합니다.
 
-## ✨ Member
+## ✨ Contributors
 <table>
   <tr>
     <td align="center">
